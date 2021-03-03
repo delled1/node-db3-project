@@ -22,7 +22,7 @@ function find() { // EXERCISE A
     .select("sc.*", )
     .leftJoin("steps as st", "sc.scheme_id", "st.scheme_id" )
     .groupBy("sc.scheme_id")
-    .orderBy("sc.scheme_id", "asc")
+    .orderBy("sc.scheme_id", "ASC")
     .count("st.step_id as number_of_steps")
 }
 
@@ -92,6 +92,20 @@ function findById(scheme_id) { // EXERCISE B
         "steps": []
       }
   */
+//  SELECT
+//  sc.scheme_name,
+//  st.*
+// FROM schemes as sc
+// LEFT JOIN steps as st
+//  ON sc.scheme_id = st.scheme_id
+// WHERE sc.scheme_id = 1
+// ORDER BY st.step_number ASC;
+
+  return db("schemes as sc")
+      .select("sc.scheme_name as", "st.*")
+      .leftJoin("steps as st", "sc.scheme_id", "st.scheme_id")
+      .where("sc.scheme_id", scheme_id)
+      .orderBy("st.step_number", "ASC")
 }
 
 function findSteps(scheme_id) { // EXERCISE C
