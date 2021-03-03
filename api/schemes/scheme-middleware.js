@@ -1,4 +1,4 @@
-const schemes = require("./scheme-model")
+
 const db = require("../../data/db-config")
 
 /*
@@ -74,6 +74,18 @@ const validateScheme = (req, res, next) => {
 const validateStep = (req, res, next) => {
 
   try{
+    if (!req.body.instructions || typeof req.body.instructions !== "string"){
+      return res.status(400).json({
+        message: "invalid step"
+      })
+    }
+
+    if (typeof req.body.step_number !== "number" || req.body.step_number < 1)
+    return res.status(400).json({
+      message: "invalid step"
+    })
+
+    next()
 
   } catch(err) {
     next(err)
