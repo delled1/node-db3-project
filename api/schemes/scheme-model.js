@@ -101,11 +101,13 @@ function findById(scheme_id) { // EXERCISE B
 // WHERE sc.scheme_id = 1
 // ORDER BY st.step_number ASC;
 
-  return db("schemes as sc")
+  const schemes =  db("schemes as sc")
       .select("sc.scheme_name as", "st.*")
       .leftJoin("steps as st", "sc.scheme_id", "st.scheme_id")
       .where("sc.scheme_id", scheme_id)
       .orderBy("st.step_number", "ASC")
+
+  return schemes
 }
 
 function findSteps(scheme_id) { // EXERCISE C
@@ -129,6 +131,11 @@ function findSteps(scheme_id) { // EXERCISE C
         }
       ]
   */
+
+  return db("steps as st")
+      .select("st.step_id", "st.step_number", "st.instructions", "st.scheme_name")
+      .where("st.scheme_id", scheme_id)
+      .orderBy("st.step_number", "ASC")
 }
 
 function add(scheme) { // EXERCISE D
