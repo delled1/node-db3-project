@@ -144,7 +144,8 @@ function findSteps(scheme_id) { // EXERCISE C
   */
 
   return db("steps as st")
-      .select("st.step_id", "st.step_number", "st.instructions", "st.scheme_name")
+      .select("st.step_id", "st.step_number", "st.instructions", "sc.scheme_name")
+      .leftJoin("schemes as sc", "sc.scheme_id", "st.scheme_id" )
       .where("st.scheme_id", scheme_id)
       .orderBy("st.step_number", "ASC")
 }

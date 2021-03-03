@@ -42,6 +42,18 @@ const validateScheme = (req, res, next) => {
 
   try{
 
+    if(!req.body.scheme_name){
+      return res.status(400).json({
+        message: "invalid scheme name"
+      })
+    }
+
+    if(typeof !req.body.scheme_name !== "string"){
+      return res.status(400).json({
+        message: "invalid scheme name"
+      })
+    }
+
   } catch(err) {
     next(err)
   }
